@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://biap16q7fwd2c"]
+
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/demo/camera.gd" id="1_p4580"]
+
+[node name="OverShoulderCamera" type="Node3D"]
+script = ExtResource("1_p4580")
+
+[node name="RootOffset" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="RootOffset"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 0.999999, 0, -1.22465e-16, 0, -0.999999, 0, 0, 0)
+collision_mask = 2
+spring_length = 2.5
+
+[node name="Camera3D" type="Camera3D" parent="RootOffset/SpringArm3D"]
+transform = Transform3D(1, 0, 1.22465e-22, 0, 1, 0, -2.46519e-32, 0, 1, 4.93038e-32, 0, 2.5)
+
+[node name="RayCast3D" type="RayCast3D" parent="RootOffset/SpringArm3D/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+visible = false
+target_position = Vector3(0, -1000, 0)
+collision_mask = 2
+collide_with_areas = true
