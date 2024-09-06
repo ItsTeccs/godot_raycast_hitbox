@@ -9,6 +9,15 @@ export_presets.cfg
 # Imported translations (automatically generated from CSV files)
 *.translation
 
+# vscode directory for the project
+.vscode/
+
+# remove temp files from tracking
+**/*.tmp
+
+# remove import metadata from tracking
+**/*.import
+
 # Mono-specific ignores
 .mono/
 data_*/
