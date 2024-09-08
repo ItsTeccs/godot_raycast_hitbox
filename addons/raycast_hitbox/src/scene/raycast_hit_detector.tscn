@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://tvc1ynsy32kf"]
+
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/script/raycast_hit_detector.gd" id="1_wfifc"]
+
+[node name="RaycastHitDetector" type="Node3D"]
+script = ExtResource("1_wfifc")

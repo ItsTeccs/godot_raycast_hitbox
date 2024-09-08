@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnd0tdeeeeqlc"]
+[gd_scene load_steps=9 format=3 uid="uid://bnd0tdeeeeqlc"]
 
 [ext_resource type="PackedScene" uid="uid://biap16q7fwd2c" path="res://addons/raycast_hitbox/src/demo/camera.tscn" id="1_e11ib"]
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/demo/controller.gd" id="1_p4yul"]
@@ -6,6 +6,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwsaq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4o76e"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_c8bdl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0aak"]
 size = Vector3(30, 0.1, 30)
@@ -31,6 +33,9 @@ shape = SubResource("CapsuleShape3D_iwsaq")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.17399, 0)
 mesh = SubResource("CapsuleMesh_4o76e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("ImmediateMesh_c8bdl")
 
 [node name="Level" type="Node3D" parent="."]
 
