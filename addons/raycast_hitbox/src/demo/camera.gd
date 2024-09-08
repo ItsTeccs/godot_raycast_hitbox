@@ -52,9 +52,15 @@ func set_zoom_override(zoom_override: float):
 func override_zoom(toggle: bool):
 	override = toggle
 
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		return
+	elif Input.is_action_just_pressed("toggle_mouse_free"):
+		var mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
+		Input.mouse_mode = mode
 		
 	if event is InputEventMouseMotion:
 		yaw -= event.relative.x * yaw_sensitivity
