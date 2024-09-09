@@ -84,14 +84,13 @@ func _ready():
 			add_point(child)
 			if debug_draw:
 				child.mesh = MeshInstance3D.new()
+				child.add_child(child.mesh)
+				child.mesh.position = Vector3.ZERO
 				child.mesh.material_override = StandardMaterial3D.new()
 				child.mesh.material_override.vertex_color_use_as_albedo = true
 				child.mesh.material_override.albedo_color = line_color
-				child.mesh.top_level = true
-				child.add_child(child.mesh)
-				child.mesh.global_position = child.global_position
-				child.mesh.position = Vector3.ZERO
 				child.mesh.mesh = ImmediateMesh.new()
+				# child.mesh.global_position = child.global_position
 
 func _draw_debug_mesh(data: Dictionary) -> void:
 	var node = data.node as RayCastHitPoint
@@ -101,20 +100,15 @@ func _draw_debug_mesh(data: Dictionary) -> void:
 
 	imesh.surface_begin(Mesh.PRIMITIVE_LINES)
 
-	for point in data.points.keys():
-		if Time.get_ticks_msec() - data.points[point] >= segment_lifetime * 1000:
-			data.points.erase(point) 
-
 	imesh.surface_set_color(line_color)
-	imesh.surface_add_vertex(data.points.keys().front())
+	imesh.surface_add_vertex(data.points.keys().front() - node.global_position)
 	for i in range(1, points.keys().size() - 1):
-		var point: Vector3 = data.points.keys()[i]
-		imesh.surface_set_color(line_color)
-		imesh.surface_add_vertex(point)
-		imesh.surface_set_color(line_color)
-		imesh.surface_add_vertex(point)
+		var point: Vector3 = data.points.keys()[i] - node.global_position
+		for j in 2:
+			imesh.surface_set_color(line_color)
+			imesh.surface_add_vertex(point)
 	imesh.surface_set_color(line_color)
-	imesh.surface_add_vertex(data.points.keys().back())
+	imesh.surface_add_vertex(data.points.keys().back() - node.global_position)
 
 	imesh.surface_end()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -133,6 +127,10 @@ func _physics_process(delta: float) -> void:
 		var origin = data.points.keys().back()
 		var end = node.global_position
 		data.points[end] = Time.get_ticks_msec()
+		
+		for point in data.points.keys():
+			if Time.get_ticks_msec() - data.points[point] >= segment_lifetime * 1000:
+				data.points.erase(point) 
 
 		if debug_draw:
 			_draw_debug_mesh(data)
@@ -146,7 +144,7 @@ func _physics_process(delta: float) -> void:
 		
 		var result = space_state.intersect_ray(query)		
 		if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
-			_hit_entities.append(result.collider)
+			# _hit_entities.append(result.collider)
 			# update to handle multiple intersections later
 
 			hit.emit(result)
