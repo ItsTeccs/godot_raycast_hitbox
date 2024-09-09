@@ -1,13 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnd0tdeeeeqlc"]
+[gd_scene load_steps=17 format=3 uid="uid://bnd0tdeeeeqlc"]
 
 [ext_resource type="PackedScene" uid="uid://biap16q7fwd2c" path="res://addons/raycast_hitbox/src/demo/camera.tscn" id="1_e11ib"]
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/demo/controller.gd" id="1_p4yul"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/script/raycast_hit_detector.gd" id="3_bfb16"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/script/raycast_hit_point.gd" id="4_ogqtv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwsaq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4o76e"]
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_c8bdl"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ns11h"]
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckrfd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_f8r65"]
+material = SubResource("StandardMaterial3D_ckrfd")
+radius = 0.05
+height = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0aak"]
 size = Vector3(30, 0.1, 30)
@@ -17,25 +27,57 @@ size = Vector3(30, 0.1, 30)
 
 [sub_resource type="Environment" id="Environment_mgouu"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_xnf0t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lvexg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx34p"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_hxn8k"]
+
 [node name="Demo" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0122728, 0, 0.00614452)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1441, 1.1064, 0)
 script = ExtResource("1_p4yul")
 
 [node name="OverShoulderCamera" parent="CharacterBody3D" instance=ExtResource("1_e11ib")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.17399, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2161, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.17399, 0)
 shape = SubResource("CapsuleShape3D_iwsaq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.17399, 0)
 mesh = SubResource("CapsuleMesh_4o76e")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D"]
-mesh = SubResource("ImmediateMesh_c8bdl")
+[node name="StaticBody3D" type="StaticBody3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246891, 2.74364)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.557681, 1.74928)
+shape = SubResource("SphereShape3D_ns11h")
+
+[node name="Orb" type="MeshInstance3D" parent="CharacterBody3D/StaticBody3D"]
+mesh = SubResource("SphereMesh_f8r65")
+skeleton = NodePath("../../..")
+
+[node name="RayCastHitDetector" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb"]
+script = ExtResource("3_bfb16")
+debug_draw = true
+
+[node name="RayCastHitPoint" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb/RayCastHitDetector"]
+script = ExtResource("4_ogqtv")
+
+[node name="RayCastHitPoint2" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb/RayCastHitDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.575241)
+script = ExtResource("4_ogqtv")
+
+[node name="RayCastHitPoint3" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb/RayCastHitDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.38127)
+script = ExtResource("4_ogqtv")
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -52,3 +94,16 @@ environment = SubResource("Environment_mgouu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1000, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.74316, 1.6531, 1.38182)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_xnf0t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_lvexg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_vx34p")
+mesh = SubResource("ImmediateMesh_hxn8k")

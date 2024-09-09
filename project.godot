@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="raycast_hitboxes"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/raycast_hitbox/plugin.cfg")
+
 [input]
 
 move_forward={
