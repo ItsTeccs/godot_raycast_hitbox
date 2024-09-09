@@ -11,6 +11,7 @@ class_name RayCastHitDetector
 @export var segment_lifetime := 1.0
 
 @export_group("Detection Settings")
+@export var ray_hit_points: Array[RayCastHitPoint]
 
 ## Mask for collision layers the RayCastHitPoints will collide with.
 @export_flags_3d_physics var ray_collision_mask = 1
@@ -73,13 +74,14 @@ func begin() -> void:
 
 func end() -> void:
 	_detecting = false
+	_hit_entities.clear()
 
 func remove_point(point: RayCastHitPoint) -> void:
 	assert(hit_point_data.has(point.name), "Attempted to remove point that doesn't exist!")
 	hit_point_data.erase(point.name)
 
 func _ready():
-	for child in get_children():
+	for child in ray_hit_points:
 		if child is RayCastHitPoint:
 			add_point(child)
 			if debug_draw:

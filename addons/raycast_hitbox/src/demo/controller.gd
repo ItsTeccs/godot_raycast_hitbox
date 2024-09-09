@@ -14,7 +14,7 @@ func _on_hit(result: Dictionary):
 
 func _ready():
 	camera = $OverShoulderCamera
-	var detector: RayCastHitDetector = $StaticBody3D/Orb/RayCastHitDetector
+	var detector: RayCastHitDetector = $RayCastHitDetector
 	detector.hit.connect(_on_hit)
 	detector.add_exclusion(self)
 	detector.begin()

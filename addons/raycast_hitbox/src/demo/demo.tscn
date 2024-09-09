@@ -64,20 +64,22 @@ shape = SubResource("SphereShape3D_ns11h")
 mesh = SubResource("SphereMesh_f8r65")
 skeleton = NodePath("../../..")
 
-[node name="RayCastHitDetector" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb"]
-script = ExtResource("3_bfb16")
-debug_draw = true
-
-[node name="RayCastHitPoint" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb/RayCastHitDetector"]
+[node name="RayCastHitPoint" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb"]
 script = ExtResource("4_ogqtv")
 
-[node name="RayCastHitPoint2" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb/RayCastHitDetector"]
+[node name="RayCastHitPoint2" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.575241)
 script = ExtResource("4_ogqtv")
 
-[node name="RayCastHitPoint3" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb/RayCastHitDetector"]
+[node name="RayCastHitPoint3" type="Node3D" parent="CharacterBody3D/StaticBody3D/Orb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.38127)
 script = ExtResource("4_ogqtv")
+
+[node name="RayCastHitDetector" type="Node3D" parent="CharacterBody3D" node_paths=PackedStringArray("ray_hit_points")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246891, 2.74364)
+script = ExtResource("3_bfb16")
+debug_draw = true
+ray_hit_points = [NodePath("../StaticBody3D/Orb/RayCastHitPoint"), NodePath("../StaticBody3D/Orb/RayCastHitPoint2"), NodePath("../StaticBody3D/Orb/RayCastHitPoint3")]
 
 [node name="Level" type="Node3D" parent="."]
 
