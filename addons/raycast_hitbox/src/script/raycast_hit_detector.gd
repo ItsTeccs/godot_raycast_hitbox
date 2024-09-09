@@ -86,6 +86,7 @@ func _ready():
 				child.mesh = MeshInstance3D.new()
 				child.add_child(child.mesh)
 				child.mesh.position = Vector3.ZERO
+				child.mesh.top_level = true
 				child.mesh.material_override = StandardMaterial3D.new()
 				child.mesh.material_override.vertex_color_use_as_albedo = true
 				child.mesh.material_override.albedo_color = line_color
@@ -96,6 +97,7 @@ func _draw_debug_mesh(data: Dictionary) -> void:
 	var node = data.node as RayCastHitPoint
 	var points = data.points
 	var imesh: ImmediateMesh = node.mesh.mesh
+	node.mesh.position = node.global_position
 	imesh.clear_surfaces()
 
 	imesh.surface_begin(Mesh.PRIMITIVE_LINES)
