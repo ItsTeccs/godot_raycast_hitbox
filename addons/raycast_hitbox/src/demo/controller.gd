@@ -31,7 +31,7 @@ func _ready():
 func _on_animation_finished(anim_name: String) -> void:
 	print_debug(anim_name)
 	if attack_anim_names.find(anim_name.replace("MeleeLib/", "")) != -1:
-		anim_tree.set("parameters/Transition/transition_request", "MeleeLib/HeavyIdle")
+		anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyIdle")
 		_attacking = false
 
 func _physics_process(delta):
