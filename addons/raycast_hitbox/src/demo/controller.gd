@@ -26,9 +26,11 @@ func _ready():
 	detector.begin()
 	
 	anim_tree = $AnimationTree
+	anim_tree.animation_finished.connect(_on_animation_finished)
 
 func _on_animation_finished(anim_name: String) -> void:
-	if attack_anim_names.find("MeleeLib-" + anim_name) != -1:
+	print_debug(anim_name)
+	if attack_anim_names.find(anim_name.replace("MeleeLib/", "")) != -1:
 		anim_tree.set("parameters/Transition/transition_request", "MeleeLib/HeavyIdle")
 		_attacking = false
 
@@ -44,19 +46,19 @@ func _physics_process(delta):
 		
 	velocity = direction * speed
 	
-	#if Input.is_action_pressed("attack") and not _attacking:
-		#_attacking = true
-		#anim_tree.set("parameters/Transition/transition_request", "MeleeLib-" + attack_anim_names[_attack_index])
-		#_attack_index = (_attack_index + 1) % attack_anim_names.size()
-#
-#
-	#if not _attacking:
-		#if velocity == Vector3.ZERO:
-			#anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyIdle")
-		#else:
-			#anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyWalking")
-	#
-	#
+	if Input.is_action_pressed("attack") and not _attacking:
+		_attacking = true
+		anim_tree.set("parameters/Transition/transition_request", "MeleeLib-" + attack_anim_names[_attack_index])
+		_attack_index = (_attack_index + 1) % attack_anim_names.size()
+
+
+	if not _attacking:
+		if velocity == Vector3.ZERO:
+			anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyIdle")
+		else:
+			anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyWalking")
+	
+	
 	# Vertical Velocity
 	if not is_on_floor(): # If in the air, fall towards the floor. Literally gravity
 		velocity.y = velocity.y - (fall_acceleration * delta)

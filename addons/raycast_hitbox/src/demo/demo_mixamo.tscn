@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://cudm2hl7sx56l"]
+
+[ext_resource type="PackedScene" uid="uid://dlajcm08qackn" path="res://addons/raycast_hitbox/src/assets/y_bot.tscn" id="1_ud5je"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0aak"]
+size = Vector3(30, 0.1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_arboh"]
+size = Vector3(30, 0.1, 30)
+
+[sub_resource type="Environment" id="Environment_mgouu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lvexg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2kev1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx34p"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_hxn8k"]
+
+[node name="Demo" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0122728, 0, 0.00614452)
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Level"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Floor"]
+shape = SubResource("BoxShape3D_r0aak")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Floor"]
+mesh = SubResource("BoxMesh_arboh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mgouu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1000, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.74316, 1.6531, 1.38182)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_lvexg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_2kev1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_vx34p")
+mesh = SubResource("ImmediateMesh_hxn8k")
+
+[node name="Y_Bot" parent="." instance=ExtResource("1_ud5je")]
