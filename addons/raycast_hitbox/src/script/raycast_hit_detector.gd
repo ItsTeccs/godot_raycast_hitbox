@@ -98,6 +98,7 @@ func _draw_debug_mesh(data: Dictionary) -> void:
 	var points = data.points
 	var imesh: ImmediateMesh = node.mesh.mesh
 	node.mesh.position = node.global_position
+	node.mesh.rotation = Vector3(0,0,0)
 	imesh.clear_surfaces()
 
 	imesh.surface_begin(Mesh.PRIMITIVE_LINES)
