@@ -6,7 +6,7 @@ extends CharacterBody3D
 @export var fall_acceleration = 75
 
 var target_velocity = Vector3.ZERO
-var anim_tree: AnimationTree
+var anim_tree: AnimationTree = null
 var detector: RayCastHitDetector
 
 var attack_anim_names: Array[String] = ["Heavy1", "Heavy2", "HeavySpin"]
@@ -45,18 +45,18 @@ func _physics_process(delta):
 	direction =	(camera.basis * -Vector3(h_axis, 0, y_axis)).normalized()
 		
 	velocity = direction * speed
-	
-	if Input.is_action_pressed("attack") and not _attacking:
-		_attacking = true
-		anim_tree.set("parameters/Transition/transition_request", "MeleeLib-" + attack_anim_names[_attack_index])
-		_attack_index = (_attack_index + 1) % attack_anim_names.size()
+	if anim_tree:
+		if Input.is_action_pressed("attack") and not _attacking:
+			_attacking = true
+			anim_tree.set("parameters/Transition/transition_request", "MeleeLib-" + attack_anim_names[_attack_index])
+			_attack_index = (_attack_index + 1) % attack_anim_names.size()
 
 
-	if not _attacking:
-		if velocity == Vector3.ZERO:
-			anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyIdle")
-		else:
-			anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyWalking")
+		if not _attacking:
+			if velocity == Vector3.ZERO:
+				anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyIdle")
+			else:
+				anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyWalking")
 	
 	
 	# Vertical Velocity
