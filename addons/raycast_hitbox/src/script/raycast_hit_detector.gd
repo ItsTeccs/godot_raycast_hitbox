@@ -91,7 +91,6 @@ func _ready():
 				child.mesh.material_override.vertex_color_use_as_albedo = true
 				child.mesh.material_override.albedo_color = line_color
 				child.mesh.mesh = ImmediateMesh.new()
-				# child.mesh.global_position = child.global_position
 
 func _draw_debug_mesh(data: Dictionary) -> void:
 	var node = data.node as RayCastHitPoint
@@ -114,9 +113,10 @@ func _draw_debug_mesh(data: Dictionary) -> void:
 	imesh.surface_add_vertex(data.points.keys().back() - node.global_position)
 
 	imesh.surface_end()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_process(delta: float) -> void:
-	if not _detecting:
+	# If mesh or detection does not need to be updated, return immediately.
+	if not _detecting and !debug_draw:
 		return
 
 	var keys = hit_point_data.keys()
@@ -125,29 +125,30 @@ func _physics_process(delta: float) -> void:
 		var points: Dictionary = data.points
 		var node: RayCastHitPoint = data.node as RayCastHitPoint
 
-		var space_state := get_world_3d().direct_space_state
-
-		var origin = data.points.keys().back()
-		var end = node.global_position
-		data.points[end] = Time.get_ticks_msec()
-		
 		for point in data.points.keys():
 			if Time.get_ticks_msec() - data.points[point] >= segment_lifetime * 1000:
 				data.points.erase(point) 
 
-		if debug_draw:
+		if debug_draw and !data.points.keys().is_empty():
 			_draw_debug_mesh(data)
 
-		var query = PhysicsRayQueryParameters3D.create(origin, end)
-		query.hit_from_inside = true
-		query.exclude = _exclusion_RIDs
-		query.collision_mask = ray_collision_mask
-		query.collide_with_areas = true
-		query.collide_with_bodies = true
-		
-		var result = space_state.intersect_ray(query)		
-		if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
-			# _hit_entities.append(result.collider)
-			# update to handle multiple intersections later
+		if _detecting:
+			var space_state := get_world_3d().direct_space_state
 
-			hit.emit(result)
+			var origin = data.points.keys().back()
+			var end = node.global_position
+			data.points[end] = Time.get_ticks_msec()
+			
+			var query = PhysicsRayQueryParameters3D.create(origin, end)
+			query.hit_from_inside = true
+			query.exclude = _exclusion_RIDs
+			query.collision_mask = ray_collision_mask
+			query.collide_with_areas = true
+			query.collide_with_bodies = true
+			
+			var result = space_state.intersect_ray(query)		
+			if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
+				# _hit_entities.append(result.collider)
+				# update to handle multiple intersections later
+
+				hit.emit(result)

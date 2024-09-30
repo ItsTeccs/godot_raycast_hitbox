@@ -23,7 +23,6 @@ func _ready():
 	detector.set_custom_filter(func(result: Dictionary) -> bool: return true)
 	detector.hit.connect(_on_hit)
 	detector.add_exclusion(self)
-	detector.begin()
 	
 	anim_tree = $AnimationTree
 	anim_tree.animation_finished.connect(_on_animation_finished)
@@ -33,6 +32,7 @@ func _on_animation_finished(anim_name: String) -> void:
 	if attack_anim_names.find(anim_name.replace("MeleeLib/", "")) != -1:
 		anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyIdle")
 		_attacking = false
+		detector.end()
 
 func _physics_process(delta):
 	var direction = Vector3.ZERO
@@ -50,6 +50,7 @@ func _physics_process(delta):
 			_attacking = true
 			anim_tree.set("parameters/Transition/transition_request", "MeleeLib-" + attack_anim_names[_attack_index])
 			_attack_index = (_attack_index + 1) % attack_anim_names.size()
+			detector.begin()
 
 
 		if not _attacking:
