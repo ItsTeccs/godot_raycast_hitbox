@@ -138,17 +138,16 @@ func _physics_process(delta: float) -> void:
 			var origin = data.points.keys().back()
 			var end = node.global_position
 			data.points[end] = Time.get_ticks_msec()
-			
-			var query = PhysicsRayQueryParameters3D.create(origin, end)
-			query.hit_from_inside = true
-			query.exclude = _exclusion_RIDs
-			query.collision_mask = ray_collision_mask
-			query.collide_with_areas = true
-			query.collide_with_bodies = true
-			
-			var result = space_state.intersect_ray(query)		
-			if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
-				# _hit_entities.append(result.collider)
-				# update to handle multiple intersections later
+			if origin:
+				var query = PhysicsRayQueryParameters3D.create(origin, end)
+				query.hit_from_inside = true
+				query.exclude = _exclusion_RIDs
+				query.collision_mask = ray_collision_mask
+				query.collide_with_areas = true
+				query.collide_with_bodies = true
+				var result = space_state.intersect_ray(query)		
+				if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
+					# _hit_entities.append(result.collider)
+					# update to handle multiple intersections later
 
-				hit.emit(result)
+					hit.emit(result)
