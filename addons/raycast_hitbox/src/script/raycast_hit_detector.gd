@@ -69,6 +69,7 @@ func add_point(point: RayCastHitPoint) -> void:
 	hit_point_data[point.name].node = point
 
 func begin() -> void:
+	_hit_entities.clear()
 	_detecting = true
 
 func end() -> void:
@@ -122,7 +123,6 @@ func _physics_process(delta: float) -> void:
 	var keys = hit_point_data.keys()
 	for key in keys:
 		var data: Dictionary = hit_point_data[key]
-		var points: Dictionary = data.points
 		var node: RayCastHitPoint = data.node as RayCastHitPoint
 
 		for point in data.points.keys():
@@ -135,7 +135,7 @@ func _physics_process(delta: float) -> void:
 		if _detecting:
 			var space_state := get_world_3d().direct_space_state
 
-			var origin = data.points.keys().back()
+			var origin = data.points.keys().back() if !data.points.is_empty() else null
 			var end = node.global_position
 			data.points[end] = Time.get_ticks_msec()
 			if origin:
@@ -147,7 +147,7 @@ func _physics_process(delta: float) -> void:
 				query.collide_with_bodies = true
 				var result = space_state.intersect_ray(query)		
 				if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
-					# _hit_entities.append(result.collider)
+					_hit_entities.append(result.collider)
 					# update to handle multiple intersections later
 
 					hit.emit(result)

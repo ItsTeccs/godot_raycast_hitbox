@@ -14,13 +14,24 @@ var _attack_index := 0
 var _attacking := false
 var camera: Node3D
 
+## Sample custom hit response method
+## result arg is a dictionary of the RayCast result from successful hits.
 func _on_hit(result: Dictionary):
-	print_debug("hit!")
+	print_debug("Hit Entity: " + result.collider.name)
+
+## Sample custom hit filtering method
+## Return true for hits that should be registered by the detector.
+## result arg is a dictionary of the RayCast result from the hit.
+func filter_hits(result: Dictionary) -> bool:
+	if result.collider.is_in_group("red") or result.collider.is_in_group("blue"):
+		return true
+	else:
+		return false
 
 func _ready():
 	camera = $OverShoulderCamera
 	detector =  $RayCastHitDetector
-	detector.set_custom_filter(func(result: Dictionary) -> bool: return true)
+	detector.set_custom_filter(filter_hits)
 	detector.hit.connect(_on_hit)
 	detector.add_exclusion(self)
 	
@@ -28,7 +39,6 @@ func _ready():
 	anim_tree.animation_finished.connect(_on_animation_finished)
 
 func _on_animation_finished(anim_name: String) -> void:
-	print_debug(anim_name)
 	if attack_anim_names.find(anim_name.replace("MeleeLib/", "")) != -1:
 		anim_tree.set("parameters/Transition/transition_request", "MeleeLib-HeavyIdle")
 		_attacking = false

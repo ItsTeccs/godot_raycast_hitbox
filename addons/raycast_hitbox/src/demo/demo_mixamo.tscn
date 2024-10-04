@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cudm2hl7sx56l"]
+[gd_scene load_steps=12 format=3 uid="uid://cudm2hl7sx56l"]
 
 [ext_resource type="PackedScene" uid="uid://dlajcm08qackn" path="res://addons/raycast_hitbox/src/assets/y_bot.tscn" id="1_ud5je"]
 
@@ -11,8 +11,19 @@ size = Vector3(30, 0.1, 30)
 [sub_resource type="Environment" id="Environment_mgouu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lvexg"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2kev1"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4cblk"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfoiq"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4d8a3"]
+albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx34p"]
 
@@ -37,14 +48,35 @@ environment = SubResource("Environment_mgouu")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1000, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.74316, 1.6531, 1.38182)
+[node name="Green" type="StaticBody3D" parent="." groups=["green"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.653, 7.70682)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Green"]
 shape = SubResource("BoxShape3D_lvexg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Green"]
 mesh = SubResource("BoxMesh_2kev1")
+surface_material_override/0 = SubResource("StandardMaterial3D_4cblk")
+
+[node name="Red" type="StaticBody3D" parent="." groups=["red"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.49068, 1.653, 7.70682)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Red"]
+shape = SubResource("BoxShape3D_lvexg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Red"]
+mesh = SubResource("BoxMesh_2kev1")
+surface_material_override/0 = SubResource("StandardMaterial3D_nfoiq")
+
+[node name="Blue" type="StaticBody3D" parent="." groups=["blue"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.491, 1.653, 7.707)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blue"]
+shape = SubResource("BoxShape3D_lvexg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Blue"]
+mesh = SubResource("BoxMesh_2kev1")
+surface_material_override/0 = SubResource("StandardMaterial3D_4d8a3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_vx34p")
