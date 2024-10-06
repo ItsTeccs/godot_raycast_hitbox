@@ -3,6 +3,7 @@ Raycast hit detection module for Godot 4, similar to Mordhau's style of hit dete
 
 ## Demo
 The demo scene can be found in `res://addons/raycast_hitbox/src/demo/demo_mixamo'
+
 Demo contains example setup for the plugin and example scripts to implement custom detection behavior. 
 
 ## How to use
@@ -12,5 +13,6 @@ Demo contains example setup for the plugin and example scripts to implement cust
 
 ## Credits
 Model for the demo character, animations, and other assets can be [found on Mixamo](https://www.mixamo.com/#/)
+
 BoneMaps and animation libraries used to create the demo can be found [here](https://github.com/catprisbrey/Godot5-OpenAnimationLibraries)
 
