@@ -10,6 +10,7 @@ Demo contains example setup for the plugin and example scripts to implement cust
 * Add any number of RayCastHitPoints to the scene
 * Register the RayCastHitPoints to the RayCastHitDetector via the exported array in the editor.
 
-### Credits
-Mixamo BoneMaps and animations used to create the demo can be found [here](https://github.com/catprisbrey/Godot5-OpenAnimationLibraries)
+## Credits
+Model for the demo character, animations, and other assets can be [found on Mixamo](https://www.mixamo.com/#/)
+BoneMaps and animation libraries used to create the demo can be found [here](https://github.com/catprisbrey/Godot5-OpenAnimationLibraries)
 
