@@ -1,6 +1,8 @@
 # Godot Raycast Hitbox
 Raycast hit detection module for Godot 4, similar to Mordhau's style of hit detection.
 
+https://github.com/user-attachments/assets/071d83dc-abf0-460b-8cf9-7123bec8d637
+
 ## Demo
 The demo scene can be found in `res://addons/raycast_hitbox/src/demo/demo_mixamo'
 
