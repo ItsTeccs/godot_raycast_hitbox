@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://biap16q7fwd2c"]
 
-[ext_resource type="Script" path="res://addons/raycast_hitbox/src/demo/camera.gd" id="1_p4580"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/demo/camera.gd" id="1_p4580"]
 
 [node name="OverShoulderCamera" type="Node3D"]
 script = ExtResource("1_p4580")

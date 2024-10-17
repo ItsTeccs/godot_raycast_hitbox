@@ -14,7 +14,7 @@ var _attacking := false
 var _camera: Node3D
 var _armature: Node3D
 var _anim_tree: AnimationTree = null
-var _detector: RayCastHitDetector
+var _detector: RayCastHitDetector3D
 var _last_attack_finished_msec := 0
 var _reset_attack_time := 1
 

@@ -1,6 +1,6 @@
 extends Node3D
 
-class_name RayCastHitDetector
+class_name RayCastHitDetector3D
 
 @export_group("Debug Settings")
 ## Toggles debug drawing of RayCastHitPoints each frame.
@@ -11,7 +11,7 @@ class_name RayCastHitDetector
 @export var segment_lifetime := 1.0
 
 @export_group("Detection Settings")
-@export var hit_points: Array[RayCastHitPoint]
+@export var hit_points: Array[RayCastHitPoint3D]
 ## Mask for collision layers the RayCastHitPoints will collide with.
 @export_flags_3d_physics var ray_collision_mask = 1
 
@@ -55,10 +55,10 @@ func add_exclusion(exclude: CollisionObject3D) -> void:
 func remove_exclusion(exclude: CollisionObject3D) -> void:
 	_exclusion_RIDs.erase(exclude.get_rid())
 
-func get_hit_point_data(point_name: String) -> RayCastHitPoint:
+func get_hit_point_data(point_name: String) -> RayCastHitPoint3D:
 	return hit_point_data[point_name] if hit_point_data.has(point_name) else null
 
-func add_point(point: RayCastHitPoint) -> void:
+func add_point(point: RayCastHitPoint3D) -> void:
 	assert(!hit_point_data.has(point.name), "Attempted to add two hit points with the same name!")
 	var default_data: Dictionary = {
 		"points": {},
@@ -75,13 +75,13 @@ func begin() -> void:
 func end() -> void:
 	_detecting = false
 
-func remove_point(point: RayCastHitPoint) -> void:
+func remove_point(point: RayCastHitPoint3D) -> void:
 	assert(hit_point_data.has(point.name), "Attempted to remove point that doesn't exist!")
 	hit_point_data.erase(point.name)
 
 func _ready():
 	for child in hit_points:
-		if child is RayCastHitPoint:
+		if child is RayCastHitPoint3D:
 			add_point(child)
 			if debug_draw:
 				child.mesh = MeshInstance3D.new()
@@ -94,7 +94,7 @@ func _ready():
 				child.mesh.mesh = ImmediateMesh.new()
 
 func _draw_debug_mesh(data: Dictionary) -> void:
-	var node = data.node as RayCastHitPoint
+	var node = data.node as RayCastHitPoint3D
 	var points = data.points
 	var imesh: ImmediateMesh = node.mesh.mesh
 	node.mesh.position = node.global_position
@@ -123,7 +123,7 @@ func _physics_process(delta: float) -> void:
 	var keys = hit_point_data.keys()
 	for key in keys:
 		var data: Dictionary = hit_point_data[key]
-		var node: RayCastHitPoint = data.node as RayCastHitPoint
+		var node: RayCastHitPoint3D = data.node as RayCastHitPoint3D
 
 		for point in data.points.keys():
 			if Time.get_ticks_msec() - data.points[point] >= segment_lifetime * 1000:
