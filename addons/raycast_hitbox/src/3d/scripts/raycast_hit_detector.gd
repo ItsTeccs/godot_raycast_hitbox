@@ -7,13 +7,13 @@ class_name RayCastHitDetector3D
 @export var debug_draw := false
 ## Color of the debug lines.
 @export var line_color: Color
-## How long each line segment should exist for after generation.
-@export var segment_lifetime := 1.0
 
 @export_group("Detection Settings")
 @export var hit_points: Array[RayCastHitPoint3D]
 ## Mask for collision layers the RayCastHitPoints will collide with.
 @export_flags_3d_physics var ray_collision_mask = 1
+## How long each line segment should exist for after generation.
+@export var segment_lifetime := 1.0
 
 ## Emitted when a hit is detected by a RayCastHitPoint.
 signal hit

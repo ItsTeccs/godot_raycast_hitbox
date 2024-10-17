@@ -2,6 +2,10 @@ extends Node2D
 
 class_name RayCastHitDetector2D
 
+@export_group("Debug Settings")
+## Toggles debug drawing of RayCastHitPoints each frame.
+@export var debug_draw := false
+
 @export_group("Detection Settings")
 @export var hit_points: Array[RayCastHitPoint2D]
 ## Mask for collision layers the RayCastHitPoints will collide with.
@@ -63,6 +67,16 @@ func begin() -> void:
 func end() -> void:
 	_detecting = false
 
+	var keys = hit_point_data.keys()
+	for key in keys:
+		var data: Dictionary = hit_point_data[key]
+		var node: RayCastHitPoint2D = data.node as RayCastHitPoint2D
+		data.points.clear()
+
+	if debug_draw:
+		for child in hit_points:
+			child.debug_mesh.clear_points()
+
 func remove_point(point: RayCastHitPoint2D) -> void:
 	assert(hit_point_data.has(point.name), "Attempted to remove point that doesn't exist!")
 	hit_point_data.erase(point.name)
@@ -71,9 +85,31 @@ func _ready():
 	for child in hit_points:
 		if child is RayCastHitPoint2D:
 			add_point(child)
-			
+			if debug_draw:
+				# Add a default Line2D if there is no custom line set.
+				if !child.debug_mesh:
+					child.debug_mesh = Line2D.new()
+					child.add_child(child.debug_mesh)
+				else:
+					if child.debug_mesh.get_parent() != child:
+						push_warning("Line2D is not a direct child of RayCastHitPoint2D")
+
+
+func _draw_debug_mesh(data: Dictionary) -> void:
+	var node = data.node as RayCastHitPoint2D
+	var points = data.points
+	var line2d: Line2D = node.debug_mesh
+	line2d.clear_points()
+
+	for i in range(1, points.keys().size() - 1):
+		var point: Vector2 = data.points.keys()[i] - node.global_position
+		# for j in 2:
+		#	line2d.add_point(point)
+		line2d.add_point(point)
+
 func _physics_process(delta: float) -> void:
-	if not _detecting:
+	# If mesh or detection does not need to be updated, return immediately.
+	if not _detecting and !debug_draw:
 		return
 
 	var keys = hit_point_data.keys()
@@ -85,24 +121,25 @@ func _physics_process(delta: float) -> void:
 			if Time.get_ticks_msec() - data.points[point] >= segment_lifetime * 1000:
 				data.points.erase(point) 
 
-		# if debug_draw and !data.points.keys().is_empty():
-		#	_draw_debug_mesh(data)
+		if debug_draw and !data.points.keys().is_empty():
+			_draw_debug_mesh(data)
 
-		var space_state := get_world_2d().direct_space_state
+		if _detecting:
+			var space_state := get_world_2d().direct_space_state
 
-		var origin = data.points.keys().back() if !data.points.is_empty() else null
-		var end = node.global_position
-		data.points[end] = Time.get_ticks_msec()
-		if origin:
-			var query = PhysicsRayQueryParameters2D.create(origin, end)
-			query.hit_from_inside = true
-			query.exclude = _exclusion_RIDs
-			query.collision_mask = ray_collision_mask
-			query.collide_with_areas = true
-			query.collide_with_bodies = true
-			var result = space_state.intersect_ray(query)		
-			if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
-				_hit_entities.append(result.collider)
-				# update to handle multiple intersections later
+			var origin = data.points.keys().back() if !data.points.is_empty() else null
+			var end = node.global_position
+			data.points[end] = Time.get_ticks_msec()
+			if origin:
+				var query = PhysicsRayQueryParameters2D.create(origin, end)
+				query.hit_from_inside = true
+				query.exclude = _exclusion_RIDs
+				query.collision_mask = ray_collision_mask
+				query.collide_with_areas = true
+				query.collide_with_bodies = true
+				var result = space_state.intersect_ray(query)		
+				if result and _custom_filter_method.call(result) and (_hit_entities.find(result.collider) == -1):
+					_hit_entities.append(result.collider)
+					# update to handle multiple intersections later
 
-				hit.emit(result)
+					hit.emit(result)

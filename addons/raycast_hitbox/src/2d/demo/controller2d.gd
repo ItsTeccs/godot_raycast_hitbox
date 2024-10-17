@@ -6,6 +6,7 @@ var _detector: RayCastHitDetector2D
 ## result arg is a dictionary of the RayCast result from successful hits.
 func _on_hit(result: Dictionary):
 	print_debug("Hit Entity: " + result.collider.name)
+	result.collider.queue_free()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

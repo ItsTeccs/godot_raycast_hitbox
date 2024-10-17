@@ -12,11 +12,17 @@ size = Vector2(142, 97)
 [node name="MouseTracker" type="Node2D" parent="."]
 script = ExtResource("1_1hk5r")
 
-[node name="RayCastHitPoint2D" type="Node2D" parent="MouseTracker"]
+[node name="RayCastHitPoint2D" type="Node2D" parent="MouseTracker" node_paths=PackedStringArray("debug_mesh")]
 script = ExtResource("2_qwhe5")
+debug_mesh = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="MouseTracker/RayCastHitPoint2D"]
+width = 5.0
+default_color = Color(0.0941176, 0.286275, 1, 1)
 
 [node name="RayCastHitDetector2D" type="Node2D" parent="MouseTracker" node_paths=PackedStringArray("hit_points")]
 script = ExtResource("3_a2384")
+debug_draw = true
 hit_points = [NodePath("../RayCastHitPoint2D")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -24,4 +30,28 @@ hit_points = [NodePath("../RayCastHitPoint2D")]
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_u5vkm")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(408, -221)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+shape = SubResource("RectangleShape2D_u5vkm")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(429, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_u5vkm")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-460, 162)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_u5vkm")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(-385, -193)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("RectangleShape2D_u5vkm")
