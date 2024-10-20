@@ -1,8 +1,8 @@
 [gd_scene load_steps=21 format=4 uid="uid://dlajcm08qackn"]
 
-[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_detector.gd" id="1_0256t"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_detector_3d.gd" id="1_0256t"]
 [ext_resource type="AnimationLibrary" uid="uid://d3h8qu2uqwwdf" path="res://addons/raycast_hitbox/src/assets/MeleeLib.res" id="1_bhiy2"]
-[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_point.gd" id="2_75nx8"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_point_3d.gd" id="2_75nx8"]
 [ext_resource type="PackedScene" uid="uid://biap16q7fwd2c" path="res://addons/raycast_hitbox/src/3d/demo/camera.tscn" id="2_xp4s7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u38ud"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqqlmle0ffboi"]
+[gd_scene load_steps=6 format=3 uid="uid://bqqlmle0ffboi"]
 
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/2d/demo/controller2d.gd" id="1_1hk5r"]
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_point_2d.gd" id="2_qwhe5"]
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_detector_2d.gd" id="3_a2384"]
-[ext_resource type="PackedScene" uid="uid://dounglnoww8l1" path="res://addons/raycast_hitbox/src/2d/demo/demo_rectangle.tscn" id="4_vn7ik"]
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/2d/demo/static_body_spawner.gd" id="5_ablhe"]
 
 [sub_resource type="Gradient" id="Gradient_nssdj"]
@@ -29,8 +28,6 @@ debug_draw = true
 hit_points = [NodePath("../RayCastHitPoint2D")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="StaticBody2D" parent="." instance=ExtResource("4_vn7ik")]
 
 [node name="StaticBodySpawner" type="Node" parent="."]
 script = ExtResource("5_ablhe")

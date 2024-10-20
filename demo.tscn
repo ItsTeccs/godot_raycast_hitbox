@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/demo/controller3d.gd" id="1_484nq"]
 [ext_resource type="PackedScene" uid="uid://biap16q7fwd2c" path="res://addons/raycast_hitbox/src/3d/demo/camera.tscn" id="2_saehw"]
-[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_point.gd" id="3_8bfo1"]
-[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_detector.gd" id="4_frjem"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_point_3d.gd" id="3_8bfo1"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_detector_3d.gd" id="4_frjem"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwsaq"]
 
