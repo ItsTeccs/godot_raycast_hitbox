@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dounglnoww8l1"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1e5mk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t00pr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5vkm"]
+size = Vector2(142, 97)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_twe7x"]
+
+[node name="StaticBody2D" type="StaticBody2D"]
+material = SubResource("CanvasItemMaterial_1e5mk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+material = SubResource("CanvasItemMaterial_t00pr")
+shape = SubResource("RectangleShape2D_u5vkm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(142, 97)
+texture = SubResource("CanvasTexture_twe7x")
