@@ -27,7 +27,7 @@ var _custom_filter_method: Callable = func(result: Dictionary) -> bool: return t
 
 ## Sets a custom filter method that is checked against colliding entities.
 ##
-## If a collision fails this custom hueristic the <NAME> signal will not be called.
+## If a collision fails this custom heuristic the <NAME> signal will not be called.
 ##
 ## To reset the custom filter to default, set the filter to null.
 ##
@@ -41,7 +41,7 @@ func set_custom_filter(foo: Callable) -> void:
 		_custom_filter_method = foo
 
 func draw_debug_line() -> void:
-	# Precheck to remove any expired segments
+	# Pre-check to remove any expired segments
 	pass
 	# Some mesh logic here..
 

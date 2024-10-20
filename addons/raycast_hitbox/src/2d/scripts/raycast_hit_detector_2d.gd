@@ -24,7 +24,7 @@ var _custom_filter_method: Callable = func(result: Dictionary) -> bool: return t
 
 ## Sets a custom filter method that is checked against colliding entities.
 ##
-## If a collision fails this custom hueristic the <NAME> signal will not be called.
+## If a collision fails this custom heuristic the <NAME> signal will not be called.
 ##
 ## To reset the custom filter to default, set the filter to null.
 ##
@@ -93,7 +93,6 @@ func _ready():
 				else:
 					if child.debug_mesh.get_parent() != child:
 						push_warning("Line2D is not a direct child of RayCastHitPoint2D")
-
 
 func _draw_debug_mesh(data: Dictionary) -> void:
 	var node = data.node as RayCastHitPoint2D

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cudm2hl7sx56l"]
+[gd_scene load_steps=13 format=3 uid="uid://cudm2hl7sx56l"]
 
 [ext_resource type="PackedScene" uid="uid://dlajcm08qackn" path="res://addons/raycast_hitbox/src/assets/y_bot.tscn" id="1_ud5je"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/demo/controller3d.gd" id="2_57vxe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0aak"]
 size = Vector3(30, 0.1, 30)
@@ -83,3 +84,4 @@ material_override = SubResource("StandardMaterial3D_vx34p")
 mesh = SubResource("ImmediateMesh_hxn8k")
 
 [node name="Y_Bot" parent="." instance=ExtResource("1_ud5je")]
+script = ExtResource("2_57vxe")

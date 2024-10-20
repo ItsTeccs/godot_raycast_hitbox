@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqqlmle0ffboi"]
+[gd_scene load_steps=6 format=3 uid="uid://bqqlmle0ffboi"]
 
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/2d/demo/controller2d.gd" id="1_1hk5r"]
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_point_2d.gd" id="2_qwhe5"]
 [ext_resource type="Script" path="res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_detector_2d.gd" id="3_a2384"]
+
+[sub_resource type="Gradient" id="Gradient_nssdj"]
+colors = PackedColorArray(0, 0.970769, 0.741088, 1, 1, 0.623529, 0.12549, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5vkm"]
 size = Vector2(142, 97)
@@ -19,6 +22,7 @@ debug_mesh = NodePath("Line2D")
 [node name="Line2D" type="Line2D" parent="MouseTracker/RayCastHitPoint2D"]
 width = 5.0
 default_color = Color(0.0941176, 0.286275, 1, 1)
+gradient = SubResource("Gradient_nssdj")
 
 [node name="RayCastHitDetector2D" type="Node2D" parent="MouseTracker" node_paths=PackedStringArray("hit_points")]
 script = ExtResource("3_a2384")
