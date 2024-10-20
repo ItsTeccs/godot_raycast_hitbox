@@ -40,11 +40,6 @@ func set_custom_filter(foo: Callable) -> void:
 	else:
 		_custom_filter_method = foo
 
-func draw_debug_line() -> void:
-	# Pre-check to remove any expired segments
-	pass
-	# Some mesh logic here..
-
 func get_exclusions() -> Array[RID]:
 	return _exclusion_RIDs
 
