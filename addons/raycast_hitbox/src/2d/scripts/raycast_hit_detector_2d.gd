@@ -67,16 +67,6 @@ func begin() -> void:
 func end() -> void:
 	_detecting = false
 
-	var keys = hit_point_data.keys()
-	for key in keys:
-		var data: Dictionary = hit_point_data[key]
-		var node: RayCastHitPoint2D = data.node as RayCastHitPoint2D
-		data.points.clear()
-
-	if debug_draw:
-		for child in hit_points:
-			child.debug_mesh.clear_points()
-
 func remove_point(point: RayCastHitPoint2D) -> void:
 	assert(hit_point_data.has(point.name), "Attempted to remove point that doesn't exist!")
 	hit_point_data.erase(point.name)
@@ -93,6 +83,7 @@ func _ready():
 				else:
 					if child.debug_mesh.get_parent() != child:
 						push_warning("Line2D is not a direct child of RayCastHitPoint2D")
+
 
 func _draw_debug_mesh(data: Dictionary) -> void:
 	var node = data.node as RayCastHitPoint2D
