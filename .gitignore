@@ -12,6 +12,9 @@ export_presets.cfg
 # vscode directory for the project
 .vscode/
 
+# JetBrains user files
+.idea/
+
 # remove temp files from tracking
 **/*.tmp
 
