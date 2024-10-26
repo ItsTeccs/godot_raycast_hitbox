@@ -8,17 +8,17 @@ func _enter_tree():
 
 	# Adding 3D nodes
 	add_custom_type("RayCastHitDetector3D", "Node3D",  \
-	preload("res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_detector_3d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_detector_icon.png"))
+	preload("res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_detector_3d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_detector_3d_icon.svg"))
 
 	add_custom_type("RayCastHitPoint3D", "Node3D",  \
-	preload("res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_point_3d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_point_icon.png"))
+	preload("res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_point_3d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_point_3d_icon.svg"))
 
 	# Adding 2D Nodes
 	add_custom_type("RayCastHitDetector3D", "Node3D",  \
-	preload("res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_detector_2d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_detector_icon.png"))
+	preload("res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_detector_2d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_detector_2d_icon.svg"))
 
 	add_custom_type("RayCastHitPoint3D", "Node3D",  \
-	preload("res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_point_2d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_point_icon.png"))
+	preload("res://addons/raycast_hitbox/src/2d/scripts/raycast_hit_point_2d.gd"), preload("res://addons/raycast_hitbox/src/assets/raycast_hit_point_2d_icon.svg"))
 
 func _exit_tree():
 	# Clean-up of the plugin goes here.
