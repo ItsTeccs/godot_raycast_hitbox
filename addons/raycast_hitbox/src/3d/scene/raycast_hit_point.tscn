@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1h34uw6c6ad0"]
 
-[ext_resource type="Script" path="res://addons/raycast_hitbox/src/script/raycast_hit_point.gd" id="1_ekjht"]
+[ext_resource type="Script" path="res://addons/raycast_hitbox/src/3d/scripts/raycast_hit_point_3d.gd" id="1_ekjht"]
 
 [node name="RaycastHitPoint" type="Node3D"]
 script = ExtResource("1_ekjht")
