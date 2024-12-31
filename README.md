@@ -16,5 +16,5 @@ Demo contains example setup for the plugin and example scripts to implement cust
 ## Credits
 Model for the demo character, animations, and other assets can be [found on Mixamo](https://www.mixamo.com/#/)
 
-BoneMaps and animation libraries used to create the demo can be found [here](https://github.com/catprisbrey/Godot5-OpenAnimationLibraries)
+BoneMaps and animation libraries used to create the demo can be found [here](https://github.com/catprisbrey/Godot4-OpenAnimationLibraries)
 
